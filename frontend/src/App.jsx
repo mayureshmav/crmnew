@@ -7,6 +7,8 @@ import Projects from "./pages/Projects";
 import Quotations from "./pages/Quotations";
 import Tasks from "./pages/Tasks";
 import Layouts from "./pages/Layouts";
+import Vendors from "./pages/Vendors";
+import Reports from "./pages/Reports";
 
 function App() {
   return (
@@ -21,7 +23,9 @@ function App() {
         <Route path="/quotations" element={<Quotations />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/tasks" element={<Tasks />} />
-        <Route path="/layouts" element={<Layouts />} />
+        <Route path="/layouts" element={<Layouts />}/>
+        <Route path="/vendors" element={<Vendors />} />
+        <Route path="/reports" element={<Reports />} />
       </Routes>
 
     </BrowserRouter>

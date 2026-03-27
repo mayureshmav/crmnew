@@ -1,6 +1,12 @@
 import MainLayout from "../layout/MainLayout";
 import { motion } from "framer-motion";
-import { FaPhone, FaMapMarkerAlt } from "react-icons/fa";
+import {
+  FaPhone,
+  FaMapMarkerAlt,
+  FaUserTie,
+  FaCalendarAlt,
+  FaFileInvoice,
+} from "react-icons/fa";
 
 const LeadDetails = () => {
 
@@ -10,7 +16,9 @@ const LeadDetails = () => {
     city: "Delhi",
     source: "IndiaMart",
     budget: "12L",
-    status: "New"
+    status: "New",
+    email: "rahul@gmail.com",
+    assignedPM: "Amit Verma",
   };
 
   const activities = [
@@ -25,43 +33,64 @@ const LeadDetails = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
+        className="space-y-6"
       >
 
-        <h1 className="text-2xl font-semibold mb-6">
+        {/* PAGE TITLE */}
+
+        <h1 className="text-2xl font-semibold text-gray-800">
           Lead Details
         </h1>
 
-        {/* Lead Info Card */}
+        {/* LEAD PROFILE CARD */}
 
-        <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm mb-6">
+        <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
 
-          <div className="flex flex-col md:flex-row md:items-center justify-between">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
 
-            <div>
+            {/* LEFT SECTION */}
 
-              <h2 className="text-xl font-semibold">
-                {lead.name}
-              </h2>
+            <div className="flex items-center gap-4">
 
-              <p className="text-gray-500 flex items-center gap-2 mt-2">
-                <FaPhone /> {lead.phone}
-              </p>
+              {/* Avatar */}
 
-              <p className="text-gray-500 flex items-center gap-2 mt-1">
-                <FaMapMarkerAlt /> {lead.city}
-              </p>
+              <div className="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold text-lg">
+                {lead.name.charAt(0)}
+              </div>
+
+              <div>
+
+                <h2 className="text-xl font-semibold">
+                  {lead.name}
+                </h2>
+
+                <p className="text-gray-500 flex items-center gap-2 mt-1">
+                  <FaPhone /> {lead.phone}
+                </p>
+
+                <p className="text-gray-500 flex items-center gap-2">
+                  <FaMapMarkerAlt /> {lead.city}
+                </p>
+
+              </div>
 
             </div>
 
-            <div className="mt-4 md:mt-0">
+            {/* RIGHT SECTION */}
 
-              <span className="bg-indigo-100 text-indigo-600 px-3 py-1 rounded text-sm">
-                {lead.source}
-              </span>
+            <div className="flex flex-wrap gap-3">
 
-              <p className="mt-2 font-medium">
-                Budget: ₹{lead.budget}
-              </p>
+              <button className="bg-green-600 text-white px-4 py-2 rounded-lg text-sm flex items-center gap-2">
+                <FaPhone /> Call
+              </button>
+
+              <button className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm flex items-center gap-2">
+                <FaCalendarAlt /> Schedule Meeting
+              </button>
+
+              <button className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm flex items-center gap-2">
+                <FaFileInvoice /> Create Quote
+              </button>
 
             </div>
 
@@ -69,9 +98,47 @@ const LeadDetails = () => {
 
         </div>
 
-        {/* Activity Timeline */}
+        {/* LEAD INFORMATION */}
 
-        <div className="bg-white border border-gray-200 rounded-xl p-6">
+        <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+
+          <h3 className="font-semibold mb-4">
+            Lead Information
+          </h3>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+
+            <div>
+              <span className="text-gray-500">Source</span>
+              <p className="font-medium">{lead.source}</p>
+            </div>
+
+            <div>
+              <span className="text-gray-500">Budget</span>
+              <p className="font-medium text-green-600">
+                ₹{lead.budget}
+              </p>
+            </div>
+
+            <div>
+              <span className="text-gray-500">Email</span>
+              <p className="font-medium">{lead.email}</p>
+            </div>
+
+            <div>
+              <span className="text-gray-500">Assigned PM</span>
+              <p className="font-medium flex items-center gap-2">
+                <FaUserTie /> {lead.assignedPM}
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+        {/* ACTIVITY TIMELINE */}
+
+        <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
 
           <h3 className="font-semibold mb-4">
             Activity Timeline
@@ -85,7 +152,7 @@ const LeadDetails = () => {
                 key={activity.id}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                className="flex justify-between items-center border-b pb-2"
+                className="flex justify-between items-center border-b pb-3"
               >
 
                 <p className="text-gray-700">
@@ -101,6 +168,26 @@ const LeadDetails = () => {
             ))}
 
           </div>
+
+        </div>
+
+        {/* NOTES SECTION */}
+
+        <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+
+          <h3 className="font-semibold mb-4">
+            Notes
+          </h3>
+
+          <textarea
+            placeholder="Add notes about this lead..."
+            className="w-full border border-gray-200 rounded-lg p-3 text-sm focus:ring-2 focus:ring-indigo-200"
+            rows="4"
+          />
+
+          <button className="mt-3 bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm">
+            Save Note
+          </button>
 
         </div>
 

@@ -11,24 +11,41 @@ const MainLayout = ({ children }) => {
   };
 
   return (
-    <div className="flex min-h-screen bg-slate-50">
 
-      {/* Sidebar */}
+    <div className="flex min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+
+      {/* SIDEBAR */}
+
       <Sidebar isOpen={isOpen} />
 
-      {/* Main content */}
-      <div className="flex flex-col flex-1 md:ml-64">
+      {/* MAIN AREA */}
+
+      <div className="flex flex-col flex-1 md:ml-64 transition-all duration-300">
+
+        {/* NAVBAR */}
 
         <Navbar toggleSidebar={toggleSidebar} />
 
-        <main className="p-6 md:p-8">
-          {children}
+        {/* CONTENT AREA */}
+
+        <main className="flex-1 overflow-y-auto p-6 md:p-8">
+
+          {/* PAGE CONTAINER */}
+
+          <div className="max-w-7xl mx-auto">
+
+            {children}
+
+          </div>
+
         </main>
 
       </div>
 
     </div>
+
   );
+
 };
 
 export default MainLayout;
