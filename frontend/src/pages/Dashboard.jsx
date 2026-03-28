@@ -20,49 +20,53 @@ import {
 
 const funnelData = [
   { name: "New Leads", value: 120, fill: "#3B82F6" },
-  { name: "Contacted", value: 80, fill: "#10B981" },
+  { name: "Contacted", value: 80, fill: "#22C55E" },
   { name: "Qualified", value: 50, fill: "#F59E0B" },
   { name: "Proposal", value: 30, fill: "#FB923C" },
   { name: "Closed", value: 15, fill: "#EF4444" }
 ];
 
 const pieData = [
-  { name: "IndiaMart", value: 40 },
-  { name: "MagicBricks", value: 30 },
-  { name: "Referral", value: 20 },
-  { name: "Website", value: 10 }
+  { name: "Website", value: 40 },
+  { name: "Referral", value: 25 },
+  { name: "Email Campaign", value: 20 },
+  { name: "Social Media", value: 15 }
 ];
 
-const COLORS = ["#2563EB", "#10B981", "#F59E0B", "#EF4444"];
+const COLORS = ["#6366F1", "#22C55E", "#F97316", "#EF4444"];
 
 const Dashboard = () => {
+
   return (
+
     <MainLayout>
+
       <div className="space-y-8">
 
         {/* HEADER */}
 
-        <h1 className="text-2xl font-semibold text-gray-800">
+        <h1 className="text-3xl font-bold text-gray-800">
           Leads Dashboard
         </h1>
 
-        {/* FUNNEL + PIE */}
+        {/* TOP ANALYTICS */}
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
           {/* SALES FUNNEL */}
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="lg:col-span-2 bg-white border rounded-xl p-6 shadow-sm"
+            initial={{ opacity:0, y:20 }}
+            animate={{ opacity:1, y:0 }}
+            className="lg:col-span-2 bg-gradient-to-br from-indigo-900 to-blue-900 text-white rounded-xl p-6 shadow-xl"
           >
 
-            <h3 className="font-medium mb-4">
-              Sales Funnel
+            <h3 className="text-lg font-semibold mb-4">
+              Sales Funnel Overview
             </h3>
 
             <ResponsiveContainer width="100%" height={300}>
+
               <FunnelChart>
 
                 <Funnel
@@ -71,38 +75,43 @@ const Dashboard = () => {
                   isAnimationActive
                 >
 
-                  <LabelList
-                    position="right"
-                    dataKey="name"
-                  />
+                  <LabelList position="right" dataKey="name" fill="#fff"/>
 
                 </Funnel>
 
               </FunnelChart>
+
             </ResponsiveContainer>
+
+            <div className="mt-4 text-sm opacity-90">
+              Conversion Rate
+              <span className="font-semibold text-green-300 ml-2">
+                65.8%
+              </span>
+            </div>
 
           </motion.div>
 
           {/* PIE CHART */}
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="bg-white border rounded-xl p-6 shadow-sm"
+            initial={{ opacity:0, y:20 }}
+            animate={{ opacity:1, y:0 }}
+            className="bg-gradient-to-br from-slate-900 to-indigo-900 text-white rounded-xl p-6 shadow-xl"
           >
 
-            <h3 className="font-medium mb-4">
+            <h3 className="text-lg font-semibold mb-4">
               Lead Sources
             </h3>
 
-            <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width="100%" height={260}>
 
               <PieChart>
 
                 <Pie
                   data={pieData}
                   dataKey="value"
-                  outerRadius={100}
+                  outerRadius={90}
                   label
                 >
 
@@ -129,75 +138,79 @@ const Dashboard = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
+          {/* AI SCORE */}
+
           <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="bg-blue-50 border border-blue-200 p-6 rounded-xl flex items-center gap-4"
+            whileHover={{ scale:1.05 }}
+            className="bg-gradient-to-r from-indigo-600 to-indigo-800 text-white p-6 rounded-xl shadow-lg"
           >
-            <FaChartLine className="text-blue-600 text-2xl" />
 
-            <div>
-              <p className="text-sm text-gray-600">
-                Conversion Rate
-              </p>
+            <FaChartLine className="text-2xl mb-2"/>
 
-              <h2 className="text-2xl font-bold">
-                28%
-              </h2>
-            </div>
+            <p className="text-sm opacity-80">
+              AI Lead Score
+            </p>
+
+            <h2 className="text-3xl font-bold">
+              88
+            </h2>
 
           </motion.div>
 
+          {/* PROJECTS */}
+
           <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="bg-green-50 border border-green-200 p-6 rounded-xl flex items-center gap-4"
+            whileHover={{ scale:1.05 }}
+            className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-6 rounded-xl shadow-lg"
           >
-            <FaProjectDiagram className="text-green-600 text-2xl" />
 
-            <div>
-              <p className="text-sm text-gray-600">
-                Active Projects
-              </p>
+            <FaProjectDiagram className="text-2xl mb-2"/>
 
-              <h2 className="text-2xl font-bold">
-                12
-              </h2>
-            </div>
+            <p className="text-sm opacity-80">
+              Active Projects
+            </p>
+
+            <h2 className="text-3xl font-bold">
+              15
+            </h2>
 
           </motion.div>
 
+          {/* TASKS */}
+
           <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="bg-red-50 border border-red-200 p-6 rounded-xl flex items-center gap-4"
+            whileHover={{ scale:1.05 }}
+            className="bg-gradient-to-r from-rose-500 to-pink-600 text-white p-6 rounded-xl shadow-lg"
           >
-            <FaTasks className="text-red-600 text-2xl" />
 
-            <div>
-              <p className="text-sm text-gray-600">
-                Tasks Due
-              </p>
+            <FaTasks className="text-2xl mb-2"/>
 
-              <h2 className="text-2xl font-bold">
-                52
-              </h2>
-            </div>
+            <p className="text-sm opacity-80">
+              Tasks Due
+            </p>
+
+            <h2 className="text-3xl font-bold">
+              34
+            </h2>
 
           </motion.div>
 
+          {/* REVENUE */}
+
           <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="bg-yellow-50 border border-yellow-200 p-6 rounded-xl flex items-center gap-4"
+            whileHover={{ scale:1.05 }}
+            className="bg-gradient-to-r from-amber-400 to-orange-500 text-white p-6 rounded-xl shadow-lg"
           >
-            <FaRupeeSign className="text-yellow-600 text-2xl" />
 
-            <div>
-              <p className="text-sm text-gray-600">
-                Revenue
-              </p>
+            <FaRupeeSign className="text-2xl mb-2"/>
 
-              <h2 className="text-2xl font-bold">
-                ₹12.6L
-              </h2>
-            </div>
+            <p className="text-sm opacity-90">
+              Monthly Revenue
+            </p>
+
+            <h2 className="text-3xl font-bold">
+              ₹18.4L
+            </h2>
 
           </motion.div>
 
@@ -207,68 +220,106 @@ const Dashboard = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
-          {/* REVENUE SUMMARY */}
+          {/* TOP PERFORMER */}
 
-          <div className="bg-white border rounded-xl p-6 shadow-sm">
+          <motion.div
+            initial={{ opacity:0 }}
+            animate={{ opacity:1 }}
+            className="bg-gradient-to-br from-white to-gray-50 border border-gray-200 rounded-xl shadow-lg p-6"
+          >
 
-            <h3 className="font-medium mb-4">
-              Revenue This Month
+            <h3 className="font-semibold mb-4 text-gray-700">
+              Top Performer
             </h3>
 
-            <div className="space-y-3 text-sm">
+            <div className="flex items-center gap-4">
 
-              <div className="flex justify-between">
-                <span>Top Sales Rep</span>
-                <span className="font-medium">
+              <img
+                src="https://i.pravatar.cc/100"
+                className="w-14 h-14 rounded-full border"
+              />
+
+              <div>
+
+                <p className="font-semibold text-gray-800">
                   Amit Sharma
-                </span>
-              </div>
+                </p>
 
-              <div className="flex justify-between">
-                <span>Total Deals</span>
-                <span className="font-medium">
-                  24
-                </span>
-              </div>
+                <p className="text-sm text-gray-500">
+                  Senior Sales Rep
+                </p>
 
-              <div className="flex justify-between">
-                <span>Closed Deals</span>
-                <span className="font-medium text-green-600">
-                  12
-                </span>
               </div>
 
             </div>
 
-          </div>
+            <div className="mt-4 text-sm text-gray-600 space-y-1">
 
-          {/* RECENT ACTIVITY */}
+              <p>
+                Deals Closed:
+                <span className="font-semibold"> 32</span>
+              </p>
 
-          <div className="bg-white border rounded-xl p-6 shadow-sm">
+              <p>
+                Revenue:
+                <span className="font-semibold text-indigo-600">
+                  ₹8.2L
+                </span>
+              </p>
 
-            <h3 className="font-medium mb-4">
-              Recent Activity
+            </div>
+
+          </motion.div>
+
+          {/* UPCOMING ACTIVITIES */}
+
+          <motion.div
+            initial={{ opacity:0 }}
+            animate={{ opacity:1 }}
+            className="bg-gradient-to-br from-white to-gray-50 border border-gray-200 rounded-xl shadow-lg p-6"
+          >
+
+            <h3 className="font-semibold mb-4 text-gray-700">
+              Upcoming Activities
             </h3>
 
-            <div className="space-y-3 text-sm text-gray-600">
+            <div className="space-y-3 text-sm text-gray-700">
 
-              <p>📞 Call completed with Rahul Sharma</p>
+              <p className="flex items-center gap-2">
+                <span className="text-green-500">✔</span>
+                Client Call with Rahul Sharma —
+                <span className="text-indigo-600">
+                  In 30 mins
+                </span>
+              </p>
 
-              <p>📅 Meeting scheduled for Neha Gupta</p>
+              <p className="flex items-center gap-2">
+                <span className="text-green-500">✔</span>
+                Follow-up with Neha Gupta — Tomorrow
+              </p>
 
-              <p>📄 Quotation sent to ABC Enterprises</p>
+              <p className="flex items-center gap-2">
+                <span className="text-green-500">✔</span>
+                Send Proposal to ABC Enterprises — Friday
+              </p>
 
-              <p>🏗 Project "Modern Villa" started</p>
+              <p className="flex items-center gap-2">
+                <span className="text-green-500">✔</span>
+                Review Project "NextGen App" — Monday
+              </p>
 
             </div>
 
-          </div>
+          </motion.div>
 
         </div>
 
       </div>
+
     </MainLayout>
+
   );
+
 };
 
 export default Dashboard;

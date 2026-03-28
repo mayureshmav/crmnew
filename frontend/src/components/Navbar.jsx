@@ -1,35 +1,37 @@
-import { FaBell, FaSearch, FaBars } from "react-icons/fa";
+import { FaBell, FaSearch, FaBars, FaPlus } from "react-icons/fa";
 import { motion } from "framer-motion";
 
 const Navbar = ({ toggleSidebar }) => {
+
   return (
+
     <motion.header
       initial={{ y: -40, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      className="h-20 bg-white border-b border-gray-200 flex items-center justify-between px-6 w-full sticky top-0 z-30 shadow-sm"
+      className="h-20 bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 border-b border-indigo-900 flex items-center justify-between px-6 w-full sticky top-0 z-30 shadow-lg"
     >
 
       {/* LEFT SECTION */}
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-6">
 
-        {/* Mobile menu button */}
+        {/* MOBILE MENU */}
 
         <FaBars
-          className="text-gray-600 text-xl md:hidden cursor-pointer"
+          className="text-gray-300 text-xl md:hidden cursor-pointer"
           onClick={toggleSidebar}
         />
 
         {/* SEARCH BAR */}
 
-        <div className="hidden md:flex items-center gap-3 bg-gray-100 rounded-lg px-3 py-2 w-80 focus-within:ring-2 focus-within:ring-indigo-200">
+        <div className="hidden md:flex items-center gap-3 bg-indigo-900/40 backdrop-blur-md rounded-xl px-4 py-2 w-[380px] border border-indigo-800 focus-within:ring-2 focus-within:ring-indigo-500 transition">
 
-          <FaSearch className="text-gray-400" />
+          <FaSearch className="text-gray-400 text-sm" />
 
           <input
             type="text"
             placeholder="Search leads, projects..."
-            className="outline-none bg-transparent w-full text-sm"
+            className="outline-none bg-transparent w-full text-sm text-gray-200 placeholder-gray-400"
           />
 
         </div>
@@ -38,42 +40,32 @@ const Navbar = ({ toggleSidebar }) => {
 
       {/* RIGHT SECTION */}
 
-      <div className="flex items-center gap-4 md:gap-6">
+      <div className="flex items-center gap-6">
 
         {/* ADD LEAD BUTTON */}
 
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium shadow"
+          className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium shadow-md transition"
         >
-          + Add Lead
+          <FaPlus className="text-xs" />
+          Add Lead
         </motion.button>
-
-        {/* NOTIFICATION */}
-
-        <div className="relative cursor-pointer">
-
-          <FaBell className="text-gray-500 text-lg hover:text-indigo-600 transition" />
-
-          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">
-            3
-          </span>
-
-        </div>
 
         {/* USER PROFILE */}
 
         <div className="flex items-center gap-3 cursor-pointer">
 
-          <div className="w-9 h-9 bg-indigo-100 text-indigo-600 flex items-center justify-center rounded-full font-semibold">
-            A
-          </div>
+          <img
+            src="https://i.pravatar.cc/100"
+            className="w-9 h-9 rounded-full border border-indigo-500"
+          />
 
           <div className="hidden md:block">
 
-            <p className="text-sm font-medium text-gray-700">
-              Admin
+            <p className="text-sm font-medium text-white">
+              Alex
             </p>
 
             <p className="text-xs text-gray-400">
@@ -84,10 +76,24 @@ const Navbar = ({ toggleSidebar }) => {
 
         </div>
 
+        {/* NOTIFICATIONS */}
+
+        <div className="relative cursor-pointer">
+
+          <FaBell className="text-gray-300 text-lg hover:text-white transition" />
+
+          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">
+            3
+          </span>
+
+        </div>
+
       </div>
 
     </motion.header>
+
   );
+
 };
 
 export default Navbar;
