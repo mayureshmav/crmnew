@@ -58,7 +58,7 @@ const Dashboard = () => {
           <motion.div
             initial={{ opacity:0, y:20 }}
             animate={{ opacity:1, y:0 }}
-            className="lg:col-span-2 bg-gradient-to-br from-indigo-900 to-blue-900 text-white rounded-xl p-6 shadow-xl"
+            className="lg:col-span-2 bg-gradient-to-br from-slate-900 to-indigo-900 text-white rounded-xl p-6 shadow-xl"
           >
 
             <h3 className="text-lg font-semibold mb-4">
@@ -225,10 +225,10 @@ const Dashboard = () => {
           <motion.div
             initial={{ opacity:0 }}
             animate={{ opacity:1 }}
-            className="bg-gradient-to-br from-white to-gray-50 border border-gray-200 rounded-xl shadow-lg p-6"
+            className="bg-gradient-to-br from-slate-900 to-indigo-900 text-white rounded-xl shadow-lg p-6"
           >
 
-            <h3 className="font-semibold mb-4 text-gray-700">
+            <h3 className="font-semibold mb-4 text-White">
               Top Performer
             </h3>
 
@@ -241,11 +241,11 @@ const Dashboard = () => {
 
               <div>
 
-                <p className="font-semibold text-gray-800">
+                <p className="font-semibold text-White">
                   Amit Sharma
                 </p>
 
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-gray-300">
                   Senior Sales Rep
                 </p>
 
@@ -253,7 +253,7 @@ const Dashboard = () => {
 
             </div>
 
-            <div className="mt-4 text-sm text-gray-600 space-y-1">
+            <div className="mt-4 text-sm text-white space-y-1">
 
               <p>
                 Deals Closed:
@@ -276,14 +276,14 @@ const Dashboard = () => {
           <motion.div
             initial={{ opacity:0 }}
             animate={{ opacity:1 }}
-            className="bg-gradient-to-br from-white to-gray-50 border border-gray-200 rounded-xl shadow-lg p-6"
+            className="bg-gradient-to-br from-slate-900 to-indigo-900 text-white rounded-xl shadow-lg p-6"
           >
 
-            <h3 className="font-semibold mb-4 text-gray-700">
+            <h3 className="font-semibold mb-4 text-White">
               Upcoming Activities
             </h3>
 
-            <div className="space-y-3 text-sm text-gray-700">
+            <div className="space-y-3 text-sm text-White">
 
               <p className="flex items-center gap-2">
                 <span className="text-green-500">✔</span>
