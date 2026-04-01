@@ -23,7 +23,7 @@ const Layouts = () => {
     {
       id: 2,
       project: "Office Renovation",
-      designer: "Amit",
+      designer: "Prince Choudhary",
       file: "office-layout-v2.dwg",
       type: "AutoCAD",
       status: "Approved",
