@@ -9,6 +9,9 @@ import Tasks from "./pages/Tasks";
 import Layouts from "./pages/Layouts";
 import Vendors from "./pages/Vendors";
 import Reports from "./pages/Reports";
+import ContractESign from './pages/ContractESign';
+
+
 
 function App() {
   return (
@@ -26,6 +29,8 @@ function App() {
         <Route path="/layouts" element={<Layouts />}/>
         <Route path="/vendors" element={<Vendors />} />
         <Route path="/reports" element={<Reports />} />
+        <Route path="/contract" element={<ContractESign />} />
+        
       </Routes>
 
     </BrowserRouter>

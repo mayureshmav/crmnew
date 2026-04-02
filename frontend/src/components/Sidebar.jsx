@@ -21,9 +21,10 @@ const menu = [
   { name: "Layouts", path: "/layouts", icon: <FaDraftingCompass /> },
   { name: "Vendors", path: "/vendors", icon: <FaTruck /> },
   { name: "Reports", path: "/reports", icon: <FaChartBar /> },
+  { name: "Contract & E-Sign", path: "/contract", icon: <FaFileInvoice /> }
 ];
 
-const Sidebar = ({ isOpen }) => {
+const Sidebar = ({ isOpen, onNavigate }) => {
   return (
     <aside
       className={`fixed left-0 top-0 w-64 h-screen bg-gradient-to-b from-gray-900 via-gray-900 to-gray-800 text-gray-300 z-40
@@ -55,7 +56,7 @@ const Sidebar = ({ isOpen }) => {
       <nav className="px-3 mt-6 space-y-2">
 
         {menu.map((item) => (
-          <NavLink key={item.name} to={item.path}>
+          <NavLink key={item.name} to={item.path} onClick={onNavigate}>
             {({ isActive }) => (
               <div
                 className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer
