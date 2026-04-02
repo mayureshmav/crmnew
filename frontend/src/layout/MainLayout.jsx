@@ -12,11 +12,12 @@ const MainLayout = ({ children }) => {
 
   return (
 
+
     <div className="flex min-h-screen bg-gradient-to-br from-slate-200 via-indigo-200 to-blue-200">
 
       {/* SIDEBAR */}
 
-      <Sidebar isOpen={isOpen} />
+      <Sidebar isOpen={isOpen} onNavigate={toggleSidebar} />
 
       {/* MAIN AREA */}
 
