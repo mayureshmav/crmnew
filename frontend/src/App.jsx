@@ -15,9 +15,8 @@ import Vendors from "./pages/Vendors";
 import Reports from "./pages/Reports";
 import ContractESign from './pages/ContractESign';
 
-
-
 import ProtectedRoute from "./components/ProtectedRoute";
+import ProjectBoard from './pages/ProjectBoard';
 
 function App() {
 
@@ -132,6 +131,13 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route 
+        path="/project-board" 
+        element={
+          <ProtectedRoute>
+            <ProjectBoard />
+          </ProtectedRoute>
+        } />
 
 
       </Routes>
