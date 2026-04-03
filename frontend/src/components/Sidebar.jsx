@@ -10,6 +10,7 @@ import {
   FaTasks,
   FaChartBar,
 } from "react-icons/fa";
+import { FaFileSignature } from "react-icons/fa6";
 
 const menu = [
   { name: "Dashboard", path: "/", icon: <FaChartPie /> },
@@ -21,7 +22,7 @@ const menu = [
   { name: "Layouts", path: "/layouts", icon: <FaDraftingCompass /> },
   { name: "Vendors", path: "/vendors", icon: <FaTruck /> },
   { name: "Reports", path: "/reports", icon: <FaChartBar /> },
-  { name: "Contract & E-Sign", path: "/contract", icon: <FaFileInvoice /> }
+  { name: "Contracts", path: "/contract", icon: <FaFileSignature /> }
 ];
 
 const Sidebar = ({ isOpen, onNavigate }) => {
