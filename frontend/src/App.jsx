@@ -1,4 +1,8 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+
 import Dashboard from "./pages/Dashboard";
 import Leads from "./pages/Leads";
 import LeadDetails from "./pages/LeadDetails";
@@ -13,28 +17,120 @@ import ContractESign from './pages/ContractESign';
 
 
 
+import ProtectedRoute from "./components/ProtectedRoute";
+
 function App() {
+
   return (
+
     <BrowserRouter>
 
       <Routes>
 
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/leads" element={<Leads />} />
-        <Route path="/lead-details" element={<LeadDetails />} />
-        <Route path="/meetings" element={<Meetings />} />
-        <Route path="/quotations" element={<Quotations />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/tasks" element={<Tasks />} />
-        <Route path="/layouts" element={<Layouts />}/>
-        <Route path="/vendors" element={<Vendors />} />
-        <Route path="/reports" element={<Reports />} />
-        <Route path="/contract" element={<ContractESign />} />
-        
+        {/* PUBLIC ROUTES */}
+
+        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+
+        {/* PROTECTED ROUTES */}
+
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/leads"
+          element={
+            <ProtectedRoute>
+              <Leads />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/lead-details"
+          element={
+            <ProtectedRoute>
+              <LeadDetails />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/meetings"
+          element={
+            <ProtectedRoute>
+              <Meetings />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/quotations"
+          element={
+            <ProtectedRoute>
+              <Quotations />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/projects"
+          element={
+            <ProtectedRoute>
+              <Projects />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/tasks"
+          element={
+            <ProtectedRoute>
+              <Tasks />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/layouts"
+          element={
+            <ProtectedRoute>
+              <Layouts />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/vendors"
+          element={
+            <ProtectedRoute>
+              <Vendors />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/reports"
+          element={
+            <ProtectedRoute>
+              <Reports />
+            </ProtectedRoute>
+          }
+        />
+
       </Routes>
 
     </BrowserRouter>
+
   );
+
 }
 
 export default App;
