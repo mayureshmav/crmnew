@@ -124,6 +124,15 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/contract"
+          element={
+            <ProtectedRoute>
+              <ContractESign />
+            </ProtectedRoute>
+          }
+        />
+
 
       </Routes>
 
