@@ -13,6 +13,9 @@ import Tasks from "./pages/Tasks";
 import Layouts from "./pages/Layouts";
 import Vendors from "./pages/Vendors";
 import Reports from "./pages/Reports";
+import ContractESign from './pages/ContractESign';
+
+
 
 import ProtectedRoute from "./components/ProtectedRoute";
 
