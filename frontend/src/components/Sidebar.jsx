@@ -9,6 +9,7 @@ import {
   FaProjectDiagram,
   FaTasks,
   FaChartBar,
+  FaColumns
 } from "react-icons/fa";
 import { FaFileSignature } from "react-icons/fa6";
 
@@ -22,7 +23,8 @@ const menu = [
   { name: "Layouts", path: "/layouts", icon: <FaDraftingCompass /> },
   { name: "Vendors", path: "/vendors", icon: <FaTruck /> },
   { name: "Reports", path: "/reports", icon: <FaChartBar /> },
-  { name: "Contracts", path: "/contract", icon: <FaFileSignature /> }
+  { name: "Contracts", path: "/contract", icon: <FaFileSignature /> },
+  { name: "Project Board", path: "/project-board", icon: <FaColumns /> },
 ];
 
 const Sidebar = ({ isOpen, onNavigate }) => {
