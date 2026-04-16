@@ -16,7 +16,7 @@ import { FaFileSignature } from "react-icons/fa6";
 
 const menu = [
   { name: "Dashboard", path: "/", icon: <FaChartPie /> },
-  { name: "Leads", path: "/leads", icon: <FaUserFriends /> },
+  { name: "LEAD & OPPORTUNITY MGMT ", path: "/leads", icon: <FaUserFriends /> },
   { name: "Meetings", path: "/meetings", icon: <FaCalendarAlt /> },
   { name: "Quotations", path: "/quotations", icon: <FaFileInvoice /> },
   { name: "Projects", path: "/projects", icon: <FaProjectDiagram /> },
