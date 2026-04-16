@@ -1,184 +1,228 @@
+import { useState } from "react";
 import MainLayout from "../layout/MainLayout";
-import LeadCard from "../components/LeadCard";
-import LeadTable from "../components/LeadTable";
-import LeadPipeline from "../components/LeadPipeline";
-import { motion } from "framer-motion";
-import { FaUserPlus, FaChartLine, FaHandshake, FaUsers } from "react-icons/fa";
+import LeadCard from "../components/leads/LeadCard";
+import LeadTable from "../components/leads/LeadTable";
+import LeadPipeline from "../components/leads/LeadPipeline";
+import LeadFormModal from "../components/leads/LeadFormModal";
 
-const leads = [
-  {
-    id: 1,
-    name: "Rahul Sharma",
-    phone: "9876543210",
-    city: "Delhi",
-    source: "IndiaMart",
-    budget: "12L",
-    status: "New",
-  },
-  {
-    id: 2,
-    name: "Amit Kumar",
-    phone: "9876543210",
-    city: "Noida",
-    source: "MagicBricks",
-    budget: "18L",
-    status: "Meeting",
-  },
-  {
-    id: 3,
-    name: "Neha Singh",
-    phone: "9876543210",
-    city: "Gurgaon",
-    source: "Website",
-    budget: "10L",
-    status: "Won",
-  },
-];
+import LeadScoreBadge from "../components/leads/LeadScoreBadge";
+
+import LeadStats from "../components/leads/LeadStats";
+
+import LeadFollowup from "../components/leads/LeadFollowup";
+
+import LeadFilters from "../components/leads/LeadFilters";
+
+
+
+
+
+import { motion } from "framer-motion";
+import {
+FaUserPlus,
+FaChartLine,
+FaHandshake,
+FaUsers
+} from "react-icons/fa";
 
 const Leads = () => {
-  return (
-    <MainLayout>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="space-y-8"
-      >
+const [showModal,setShowModal] = useState(false)
 
-        {/* HEADER */}
+const leads = [
+{
+id:"LD-001",
+name:"Rahul Sharma",
+phone:"9876543210",
+email:"rahul@gmail.com",
+source:"IndiaMart",
+budget:"12L",
+status:"New",
+score:"Hot"
+},
+{
+id:"LD-002",
+name:"Amit Kumar",
+phone:"9876543210",
+email:"amit@gmail.com",
+source:"MagicBricks",
+budget:"18L",
+status:"Meeting",
+score:"Warm"
+},
+{
+id:"LD-003",
+name:"Neha Singh",
+phone:"9876543210",
+email:"neha@gmail.com",
+source:"Website",
+budget:"10L",
+status:"Won",
+score:"Cold"
+}
+]
 
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+return (
 
-          <h1 className="text-2xl font-semibold text-gray-800">
-            Leads Management
-          </h1>
+<MainLayout>
 
-          <div className="flex gap-3">
+<motion.div
+initial={{opacity:0,y:20}}
+animate={{opacity:1,y:0}}
+transition={{duration:.5}}
+className="space-y-8"
+>
 
-            <input
-              type="text"
-              placeholder="Search leads..."
-              className="border border-gray-200 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-indigo-200"
-            />
+{/* HEADER */}
 
-            <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm flex items-center gap-2 shadow">
-              <FaUserPlus />
-              Add Lead
-            </button>
+<div className="flex flex-col md:flex-row justify-between gap-4">
 
-          </div>
+<h1 className="text-3xl font-bold text-gray-800">
+Lead Management
+</h1>
 
-        </div>
+<div className="flex gap-3">
 
-        {/* KPI CARDS */}
+<input
+type="text"
+placeholder="Search leads..."
+className="border border-gray-200 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-indigo-400"
+/>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+<button
+onClick={()=>setShowModal(true)}
+className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 shadow hover:scale-105 transition"
+>
 
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="bg-blue-50 border border-blue-200 p-5 rounded-xl flex items-center gap-4"
-          >
+<FaUserPlus/>
+Add Lead
 
-            <FaUsers className="text-blue-600 text-2xl" />
+</button>
 
-            <div>
-              <p className="text-sm text-gray-600">
-                Total Leads
-              </p>
+</div>
 
-              <h2 className="text-xl font-bold">
-                128
-              </h2>
-            </div>
+</div>
 
-          </motion.div>
 
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="bg-yellow-50 border border-yellow-200 p-5 rounded-xl flex items-center gap-4"
-          >
+{/* KPI SECTION */}
 
-            <FaChartLine className="text-yellow-600 text-2xl" />
+<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-            <div>
-              <p className="text-sm text-gray-600">
-                Leads In Pipeline
-              </p>
+<motion.div
+whileHover={{scale:1.05}}
+className="bg-white shadow-lg border rounded-xl p-5 flex items-center gap-4"
+>
 
-              <h2 className="text-xl font-bold">
-                72
-              </h2>
-            </div>
+<FaUsers className="text-indigo-600 text-3xl"/>
 
-          </motion.div>
+<div>
+<p className="text-gray-500 text-sm">
+Total Leads
+</p>
+<h2 className="text-xl font-bold">
+128
+</h2>
+</div>
 
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="bg-green-50 border border-green-200 p-5 rounded-xl flex items-center gap-4"
-          >
+</motion.div>
 
-            <FaHandshake className="text-green-600 text-2xl" />
 
-            <div>
-              <p className="text-sm text-gray-600">
-                Closed Deals
-              </p>
+<motion.div
+whileHover={{scale:1.05}}
+className="bg-white shadow-lg border rounded-xl p-5 flex items-center gap-4"
+>
 
-              <h2 className="text-xl font-bold">
-                24
-              </h2>
-            </div>
+<FaChartLine className="text-yellow-500 text-3xl"/>
 
-          </motion.div>
+<div>
+<p className="text-gray-500 text-sm">
+Pipeline Leads
+</p>
+<h2 className="text-xl font-bold">
+72
+</h2>
+</div>
 
-        </div>
+</motion.div>
 
-        {/* LEAD CARDS */}
 
-        <div>
+<motion.div
+whileHover={{scale:1.05}}
+className="bg-white shadow-lg border rounded-xl p-5 flex items-center gap-4"
+>
 
-          <h2 className="text-lg font-medium mb-4 text-gray-700">
-            Recent Leads
-          </h2>
+<FaHandshake className="text-green-600 text-3xl"/>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+<div>
+<p className="text-gray-500 text-sm">
+Closed Deals
+</p>
+<h2 className="text-xl font-bold">
+24
+</h2>
+</div>
 
-            {leads.map((lead) => (
-              <LeadCard key={lead.id} lead={lead} />
-            ))}
+</motion.div>
 
-          </div>
+</div>
 
-        </div>
 
-        {/* LEAD PIPELINE */}
+{/* RECENT LEADS */}
 
-        <div>
+<div>
 
-          <h2 className="text-lg font-medium mb-4 text-gray-700">
-            Lead Pipeline
-          </h2>
+<h2 className="text-lg font-semibold mb-4">
+Recent Leads
+</h2>
 
-          <LeadPipeline />
+<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-        </div>
+{leads.map((lead)=>(
+<LeadCard key={lead.id} lead={lead}/>
+))}
 
-        {/* LEAD TABLE */}
+</div>
 
-        <div>
+</div>
 
-          <h2 className="text-lg font-medium mb-4 text-gray-700">
-            All Leads
-          </h2>
 
-          <LeadTable leads={leads} />
+{/* PIPELINE */}
 
-        </div>
+<div>
 
-      </motion.div>
+<h2 className="text-lg font-semibold mb-4">
+Lead Pipeline
+</h2>
 
-    </MainLayout>
-  );
-};
+<LeadPipeline/>
 
-export default Leads;
+</div>
+
+
+{/* LEAD TABLE */}
+
+<div>
+
+<h2 className="text-lg font-semibold mb-4">
+All Leads
+</h2>
+
+<LeadTable leads={leads}/>
+
+</div>
+
+</motion.div>
+
+
+{/* ADD LEAD MODAL */}
+
+{showModal && (
+<LeadFormModal close={()=>setShowModal(false)}/>
+)}
+
+</MainLayout>
+)
+
+}
+
+export default Leads
