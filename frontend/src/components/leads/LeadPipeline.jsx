@@ -1,64 +1,137 @@
+import React from "react";
 import { motion } from "framer-motion";
+import { FaUserCircle, FaArrowRight } from "react-icons/fa";
 
-const stages=["New","Contacted","Meeting","Negotiation","Won"];
+/* Pipeline Data */
 
-export default function LeadPipeline({leads=[]}){
+const pipelineData = {
+  New: [
+    { name: "Rahul Sharma", company: "ABC Realty", score: "Hot" },
+    { name: "Neha Singh", company: "Dream Homes", score: "Warm" }
+  ],
+  Contacted: [
+    { name: "Vikas Patel", company: "Urban Build", score: "Cold" }
+  ],
+  Qualified: [
+    { name: "Amit Verma", company: "Skyline Estate", score: "Hot" }
+  ],
+  Negotiation: [
+    { name: "Sonia Kapoor", company: "Prime Land", score: "Warm" }
+  ],
+  Won: [
+    { name: "Karan Mehta", company: "Luxury Living", score: "Hot" }
+  ]
+};
 
-const grouped={};
+/* Lead Score Colors */
 
-stages.forEach(stage=>{
-grouped[stage]=leads.filter(l=>l.status===stage)
-})
+const scoreGradient = {
+  Hot: "from-red-500 to-orange-500",
+  Warm: "from-yellow-400 to-orange-400",
+  Cold: "from-blue-400 to-indigo-500"
+};
 
-return(
+export default function LeadPipeline() {
 
-<div className="grid md:grid-cols-5 gap-4">
+  return (
 
-{stages.map(stage=>(
+    <section className="w-full mt-8">
 
-<div
-key={stage}
-className="bg-white/70 backdrop-blur-lg border rounded-xl shadow-md p-4"
->
+      {/* Section Background */}
+      <div className="p-6 rounded-2xl bg-gradient-to-r from-blue-50 via-indigo-50 to-blue-100 shadow-inner">
 
-<h3 className="font-semibold text-gray-700 mb-3">
-{stage}
-</h3>
+        <h2 className="text-xl font-semibold text-gray-800 mb-6">
+          Sales Pipeline
+        </h2>
 
-<div className="space-y-3">
+        {/* Pipeline Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
 
-{grouped[stage].map(lead=>(
+          {Object.entries(pipelineData).map(([stage, leads], index) => (
 
-<motion.div
-key={lead.id}
-whileHover={{scale:1.04}}
-className="bg-white border rounded-lg p-3 shadow-sm cursor-pointer hover:shadow-md"
->
+            <motion.div
+              key={stage}
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+              className="rounded-xl border-2 border-indigo-500 bg-white shadow-md p-4 min-h-[260px]"
+            >
 
-<p className="font-medium text-gray-800">
-{lead.name}
-</p>
+              {/* Column Header */}
+              <div className="flex justify-between items-center mb-4">
 
-<p className="text-xs text-gray-400">
-{lead.source}
-</p>
+                <h3 className="text-sm font-semibold text-gray-700">
+                  {stage}
+                </h3>
 
-<p className="text-sm text-indigo-600 font-semibold">
-₹ {lead.budget}
-</p>
+                <span className="text-xs bg-gray-100 px-2 py-1 rounded-full">
+                  {leads.length}
+                </span>
 
-</motion.div>
+              </div>
 
-))}
+              {/* Lead Cards */}
+              <div className="space-y-3">
 
-</div>
+                {leads.map((lead, i) => (
 
-</div>
+                  <motion.div
+                    key={i}
+                    whileHover={{ scale: 1.05 }}
+                    className={`p-[2px] rounded-lg bg-gradient-to-r ${scoreGradient[lead.score]}`}
+                  >
 
-))}
+                    <div className="bg-white rounded-lg p-3 shadow-sm hover:shadow-md transition">
 
-</div>
+                      <div className="flex items-center gap-3">
 
-)
+                        <FaUserCircle className="text-2xl text-gray-400"/>
+
+                        <div>
+
+                          <p className="text-sm font-medium text-gray-700">
+                            {lead.name}
+                          </p>
+
+                          <p className="text-xs text-gray-500">
+                            {lead.company}
+                          </p>
+
+                        </div>
+
+                      </div>
+
+                      {/* Score Badge */}
+                      <div className="flex items-center justify-between mt-3">
+
+                        <span
+                          className={`text-xs text-white px-2 py-1 rounded-full bg-gradient-to-r ${scoreGradient[lead.score]}`}
+                        >
+                          {lead.score}
+                        </span>
+
+                        <FaArrowRight className="text-gray-400 text-xs"/>
+
+                      </div>
+
+                    </div>
+
+                  </motion.div>
+
+                ))}
+
+              </div>
+
+            </motion.div>
+
+          ))}
+
+        </div>
+
+      </div>
+
+    </section>
+
+  );
 
 }

@@ -1,127 +1,161 @@
-import { motion } from "framer-motion";
-import { useState } from "react";
+import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { FaTimes, FaUserPlus } from "react-icons/fa";
 
-export default function LeadFormModal({close}){
+export default function LeadFormModal({ isOpen, onClose }) {
 
-const[form,setForm]=useState({
-name:"",
-phone:"",
-email:"",
-source:"",
-budget:"",
-timeline:"",
-notes:""
-})
+  if (!isOpen) return null;
 
-const handleChange=(e)=>{
-setForm({...form,[e.target.name]:e.target.value})
-}
+  return (
 
-const submit=(e)=>{
-e.preventDefault()
-console.log("Lead Saved",form)
-close()
-}
+    <AnimatePresence>
 
-return(
+      {/* Background Overlay */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4"
+      >
 
-<div className="fixed inset-0 bg-black/40 flex justify-center items-center z-50">
+        {/* Modal Card */}
+        <motion.div
+          initial={{ scale: 0.8, y: 40 }}
+          animate={{ scale: 1, y: 0 }}
+          exit={{ scale: 0.8, y: 40 }}
+          transition={{ duration: 0.3 }}
+          className="w-full max-w-2xl"
+        >
 
-<motion.div
-initial={{scale:.8,opacity:0}}
-animate={{scale:1,opacity:1}}
-transition={{duration:.3}}
-className="bg-white rounded-xl shadow-xl p-6 w-[520px]"
->
+          {/* Gradient Border */}
+          <div className="rounded-2xl p-[2px] bg-gradient-to-r from-indigo-500 via-purple-500 to-blue-500">
 
-<h2 className="text-xl font-semibold mb-4">
-Add New Lead
-</h2>
+            {/* Card */}
+            <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
 
-<form
-onSubmit={submit}
-className="grid grid-cols-2 gap-3"
->
+              {/* Header */}
+              <div className="flex items-center justify-between px-6 py-4 text-white bg-gradient-to-r from-indigo-500 to-purple-600">
 
-<input
-name="name"
-placeholder="Name"
-className="border p-2 rounded"
-onChange={handleChange}
-/>
+                <div className="flex items-center gap-2">
+                  <FaUserPlus />
+                  <h2 className="font-semibold">
+                    Add New Lead
+                  </h2>
+                </div>
 
-<input
-name="phone"
-placeholder="Phone"
-className="border p-2 rounded"
-onChange={handleChange}
-/>
+                <button
+                  onClick={onClose}
+                  className="hover:opacity-80 transition"
+                >
+                  <FaTimes />
+                </button>
 
-<input
-name="email"
-placeholder="Email"
-className="border p-2 rounded"
-onChange={handleChange}
-/>
+              </div>
 
-<select
-name="source"
-className="border p-2 rounded"
-onChange={handleChange}
->
+              {/* Form */}
+              <div className="p-6">
 
-<option>Source</option>
-<option>IndiaMart</option>
-<option>MagicBricks</option>
-<option>Website</option>
+                <form className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-</select>
+                  {/* Lead Name */}
+                  <input
+                    type="text"
+                    placeholder="Lead Name"
+                    className="input-style"
+                  />
 
-<input
-name="budget"
-placeholder="Budget"
-className="border p-2 rounded"
-onChange={handleChange}
-/>
+                  {/* Phone */}
+                  <input
+                    type="text"
+                    placeholder="Phone Number"
+                    className="input-style"
+                  />
 
-<input
-name="timeline"
-placeholder="Timeline"
-className="border p-2 rounded"
-onChange={handleChange}
-/>
+                  {/* Email */}
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    className="input-style"
+                  />
 
-<textarea
-name="notes"
-placeholder="Notes"
-className="border p-2 rounded col-span-2"
-onChange={handleChange}
-/>
+                  {/* Source */}
+                  <select className="input-style">
+                    <option>Lead Source</option>
+                    <option>Website</option>
+                    <option>IndiaMart</option>
+                    <option>MagicBricks</option>
+                    <option>Referral</option>
+                    <option>Walk-in</option>
+                  </select>
 
-<div className="col-span-2 flex justify-end gap-3 mt-2">
+                  {/* Property Interest */}
+                  <input
+                    type="text"
+                    placeholder="Property Interest"
+                    className="input-style"
+                  />
 
-<button
-type="button"
-onClick={close}
-className="px-4 py-2 border rounded-lg"
->
-Cancel
-</button>
+                  {/* Budget */}
+                  <input
+                    type="text"
+                    placeholder="Budget Range"
+                    className="input-style"
+                  />
 
-<button
-className="px-4 py-2 text-white rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600"
->
-Save Lead
-</button>
+                  {/* Timeline */}
+                  <input
+                    type="text"
+                    placeholder="Timeline"
+                    className="input-style"
+                  />
 
-</div>
+                  {/* Assigned Rep */}
+                  <input
+                    type="text"
+                    placeholder="Assigned Sales Rep"
+                    className="input-style"
+                  />
 
-</form>
+                  {/* Notes */}
+                  <textarea
+                    placeholder="Notes"
+                    className="input-style md:col-span-2"
+                    rows="3"
+                  />
 
-</motion.div>
+                </form>
 
-</div>
+                {/* Buttons */}
+                <div className="flex justify-end gap-3 mt-6">
 
-)
+                  <button
+                    onClick={onClose}
+                    className="px-4 py-2 border rounded-lg hover:bg-gray-50 transition"
+                  >
+                    Cancel
+                  </button>
 
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="px-5 py-2 text-white rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 shadow-md"
+                  >
+                    Save Lead
+                  </motion.button>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </motion.div>
+
+      </motion.div>
+
+    </AnimatePresence>
+
+  );
 }

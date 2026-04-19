@@ -1,85 +1,151 @@
 import { motion } from "framer-motion";
-import { FaUsers, FaChartLine, FaHandshake, FaFire } from "react-icons/fa";
+import { FaUsers, FaFire, FaChartLine, FaUserCheck } from "react-icons/fa";
 
-const stats = [
-{
-title: "Total Leads",
-value: 128,
-icon: FaUsers,
-gradient: "from-indigo-500 to-purple-600",
-},
-{
-title: "Active Pipeline",
-value: 72,
-icon: FaChartLine,
-gradient: "from-yellow-400 to-orange-500",
-},
-{
-title: "Closed Deals",
-value: 24,
-icon: FaHandshake,
-gradient: "from-green-500 to-emerald-600",
-},
-{
-title: "Hot Leads",
-value: 19,
-icon: FaFire,
-gradient: "from-pink-500 to-red-500",
-},
-];
-
-export default function LeadStats() {
-
-return (
-
-<div className="grid md:grid-cols-4 gap-6">
-
-{stats.map((item,i)=>{
-
-const Icon = item.icon;
+export default function LeadStats(){
 
 return(
 
-<motion.div
-key={i}
-initial={{opacity:0,y:20}}
-animate={{opacity:1,y:0}}
-whileHover={{scale:1.05}}
-transition={{duration:.35}}
-className="relative overflow-hidden rounded-xl bg-white/70 backdrop-blur-lg border border-gray-200 shadow-lg p-6"
->
+<div className="space-y-6">
 
-<div
-className={`absolute inset-0 opacity-10 bg-gradient-to-r ${item.gradient}`}
-/>
-
-<div className="flex items-center justify-between">
+{/* HERO HEADER */}
 
 <div>
 
-<p className="text-sm text-gray-500">
-{item.title}
+<h1 className="text-3xl font-bold text-gray-800">
+Lead Management
+</h1>
+
+<p className="text-gray-500 text-sm mt-1">
+Track prospects, manage follow-ups and convert opportunities.
 </p>
 
-<h2 className="text-2xl font-bold text-gray-800">
-{item.value}
+</div>
+
+
+{/* STATS CONTAINER */}
+
+<div className="p-6 rounded-2xl bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 shadow-inner">
+
+<h2 className="text-lg font-semibold text-gray-800 mb-6">
+Lead Overview
 </h2>
 
-</div>
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 
-<div
-className={`p-3 rounded-lg bg-gradient-to-r ${item.gradient} text-white shadow-md`}
+{/* Total Leads */}
+
+<motion.div
+whileHover={{y:-4}}
+className="bg-white p-5 rounded-xl shadow-md"
 >
-<Icon size={18}/>
+
+<div className="flex items-center justify-between">
+
+<div className="w-12 h-12 rounded-lg bg-gradient-to-r from-purple-500 to-indigo-500 flex items-center justify-center text-white">
+<FaUsers/>
 </div>
 
+<h3 className="text-2xl font-bold text-gray-800">
+324
+</h3>
+
 </div>
+
+<p className="text-gray-600 mt-4">
+Total Leads
+</p>
+
+<div className="h-1 bg-purple-400 rounded-full mt-3"></div>
 
 </motion.div>
 
-)
 
-})}
+{/* Hot Leads */}
+
+<motion.div
+whileHover={{y:-4}}
+className="bg-white p-5 rounded-xl shadow-md"
+>
+
+<div className="flex items-center justify-between">
+
+<div className="w-12 h-12 rounded-lg bg-gradient-to-r from-red-500 to-orange-500 flex items-center justify-center text-white">
+<FaFire/>
+</div>
+
+<h3 className="text-2xl font-bold text-gray-800">
+86
+</h3>
+
+</div>
+
+<p className="text-gray-600 mt-4">
+Hot Leads
+</p>
+
+<div className="h-1 bg-red-400 rounded-full mt-3"></div>
+
+</motion.div>
+
+
+{/* Warm Leads */}
+
+<motion.div
+whileHover={{y:-4}}
+className="bg-white p-5 rounded-xl shadow-md"
+>
+
+<div className="flex items-center justify-between">
+
+<div className="w-12 h-12 rounded-lg bg-gradient-to-r from-yellow-400 to-orange-400 flex items-center justify-center text-white">
+<FaChartLine/>
+</div>
+
+<h3 className="text-2xl font-bold text-gray-800">
+142
+</h3>
+
+</div>
+
+<p className="text-gray-600 mt-4">
+Warm Leads
+</p>
+
+<div className="h-1 bg-yellow-400 rounded-full mt-3"></div>
+
+</motion.div>
+
+
+{/* Converted */}
+
+<motion.div
+whileHover={{y:-4}}
+className="bg-white p-5 rounded-xl shadow-md"
+>
+
+<div className="flex items-center justify-between">
+
+<div className="w-12 h-12 rounded-lg bg-gradient-to-r from-green-500 to-emerald-500 flex items-center justify-center text-white">
+<FaUserCheck/>
+</div>
+
+<h3 className="text-2xl font-bold text-gray-800">
+54
+</h3>
+
+</div>
+
+<p className="text-gray-600 mt-4">
+Converted
+</p>
+
+<div className="h-1 bg-green-400 rounded-full mt-3"></div>
+
+</motion.div>
+
+</div>
+
+</div>
 
 </div>
 
