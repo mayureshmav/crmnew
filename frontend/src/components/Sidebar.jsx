@@ -14,12 +14,13 @@ import {
   FaUser,
 } from "react-icons/fa";
 import { FaFileSignature } from "react-icons/fa6";
+import { FaFileInvoiceDollar } from "react-icons/fa";
 
 const menu = [
   { name: "Dashboard", path: "/", icon: <FaChartPie /> },
   { name: "LEAD & OPPORTUNITY MGMT ", path: "/leads", icon: <FaUserFriends /> },
   { name: "Meetings", path: "/meetings", icon: <FaCalendarAlt /> },
-  { name: "Quotations", path: "/quotations", icon: <FaFileInvoice /> },
+  { name: "Costing & Quotations", path: "/quotations", icon: <FaFileInvoice /> },
   { name: "Projects", path: "/projects", icon: <FaProjectDiagram /> },
   { name: "Tasks", path: "/tasks", icon: <FaTasks /> },
   { name: "Layouts", path: "/layouts", icon: <FaDraftingCompass /> },
@@ -27,7 +28,8 @@ const menu = [
   { name: "Reports", path: "/reports", icon: <FaChartBar /> },
   { name: "Contracts", path: "/contract", icon: <FaFileSignature /> },
   { name: "Project Board", path: "/project-board", icon: <FaColumns /> },
-  { name: "Client Discovery", path: "/client-discovery", icon: <FaUser /> },
+  { name: "Client Intake & Discovery", path: "/client-discovery", icon: <FaUser /> },
+  { name: "Invoice Management", path: "/invoices", icon: <FaFileInvoiceDollar /> },
 ];
 
 const Sidebar = ({ isOpen, onNavigate }) => {

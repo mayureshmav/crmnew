@@ -18,6 +18,7 @@ import ContractESign from './pages/ContractESign';
 import ProtectedRoute from "./components/ProtectedRoute";
 import ProjectBoard from './pages/ProjectBoard';
 import ClientDiscovery from "./pages/ClientDiscovery";
+import Invoices from './pages/Invoices';
 
 function App() {
 
@@ -146,6 +147,14 @@ function App() {
         <ProtectedRoute>
           <ClientDiscovery/>
         </ProtectedRoute>
+      } />
+
+      <Route 
+      path="/invoices" 
+      element={
+        <protectedRoute>
+          <Invoices />
+        </protectedRoute>
       } />
 
 
