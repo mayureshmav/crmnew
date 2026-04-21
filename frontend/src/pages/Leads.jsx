@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { FaUsers } from "react-icons/fa";
 import MainLayout from "../layout/MainLayout";
 
 import LeadStats from "../components/leads/LeadStats";
@@ -7,6 +8,11 @@ import LeadCard from "../components/leads/LeadCard";
 import LeadPipeline from "../components/leads/LeadPipeline";
 import LeadFollowup from "../components/leads/LeadFollowup";
 import LeadActivityTimeline from "../components/leads/LeadActivityTimeline";
+import LeadTable from "../components/leads/LeadTable";
+import LeadAssignmentModal from "../components/leads/LeadAssignmentModal";
+import LeadScoreConfig from "../components/leads/LeadScoreConfig";
+import LeadImportStatus from "../components/leads/LeadImportStatus";
+import LeadDuplicateAlert from "../components/leads/LeadDuplicateAlert";
 
 const Leads = () => {
 
@@ -54,12 +60,22 @@ return (
 initial={{opacity:0,y:25}}
 animate={{opacity:1,y:0}}
 transition={{duration:.45}}
-className="space-y-10"
+className="space-y-12"
 >
 
-{/* STATS + HERO */}
+{/* DASHBOARD HERO */}
 
 <LeadStats />
+
+
+{/* IMPORT STATUS (PORTAL API) */}
+
+<LeadImportStatus />
+
+
+{/* SCORING RULES */}
+
+<LeadScoreConfig />
 
 
 {/* FILTERS */}
@@ -67,24 +83,75 @@ className="space-y-10"
 <LeadFilters />
 
 
-{/* RECENT LEADS */}
-
-<div className="p-6 rounded-2xl bg-gradient-to-r from-blue-50 via-indigo-50 to-blue-100 shadow-inner">
-
-<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-{leads.map((lead)=>(
-<LeadCard key={lead.id} lead={lead}/>
-))}
-
-</div>
-
-</div>
-
-
 {/* PIPELINE */}
 
 <LeadPipeline />
+
+
+{/* RECENT LEADS CARDS */}
+
+<div className="p-6 rounded-2xl bg-gradient-to-r from-blue-50 via-indigo-50 to-blue-100 shadow-inner">
+
+  {/* HEADER */}
+
+  <div className="flex items-center justify-between mb-6">
+
+    <div className="flex items-center gap-3">
+
+      <motion.div
+        animate={{
+          boxShadow:[
+            "0 0 0px rgba(79,70,229,0.3)",
+            "0 0 14px rgba(79,70,229,0.6)",
+            "0 0 0px rgba(79,70,229,0.3)"
+          ]
+        }}
+        transition={{
+          duration:2,
+          repeat:Infinity
+        }}
+        className="w-10 h-10 rounded-lg bg-gradient-to-r from-indigo-500 to-blue-500 flex items-center justify-center text-white"
+      >
+        <FaUsers/>
+      </motion.div>
+
+      <div>
+
+        <h2 className="text-lg font-semibold text-gray-800">
+          Recent Leads
+        </h2>
+
+        <p className="text-sm text-gray-500">
+          Latest captured prospects
+        </p>
+
+      </div>
+
+    </div>
+
+    <span className="text-xs text-indigo-600 font-medium">
+      Live Leads
+    </span>
+
+  </div>
+
+
+  {/* CARDS GRID */}
+
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+    {leads.map((lead)=>(
+      <LeadCard key={lead.id} lead={lead}/>
+    ))}
+
+  </div>
+
+</div>
+
+
+{/* FULL LEAD TABLE */}
+
+<LeadTable />
 
 
 {/* FOLLOW UPS */}
@@ -92,9 +159,19 @@ className="space-y-10"
 <LeadFollowup />
 
 
-{/* ACTIVITY TIMELINE */}
+{/* ACTIVITY HISTORY */}
 
 <LeadActivityTimeline />
+
+
+{/* DUPLICATE ALERT (shows only when duplicate detected) */}
+
+<LeadDuplicateAlert />
+
+
+{/* ASSIGNMENT MODAL */}
+
+<LeadAssignmentModal />
 
 </motion.div>
 
