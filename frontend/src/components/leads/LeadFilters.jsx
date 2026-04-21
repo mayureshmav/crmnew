@@ -36,10 +36,10 @@ const LeadFilters = () => {
     >
 
       {/* Gradient Filter Card */}
-      <div className="relative rounded-2xl p-[1px] bg-gradient-to-r from-indigo-500 via-purple-500 to-blue-500 shadow-lg">
+      <div className="relative rounded-2xl shadow-lg">
 
         {/* Inner Card */}
-        <div className="rounded-2xl bg-white p-6 backdrop-blur-md">
+        <div className="rounded-2xl  bg-gradient-to-r from-blue-50 via-indigo-50 to-blue-100 shadow-inner p-6 backdrop-blur-md">
 
           {/* Header */}
           <div className="flex items-center justify-between mb-6">

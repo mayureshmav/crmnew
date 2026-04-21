@@ -14,6 +14,14 @@ const MainLayout = ({ children }) => {
 
     <div className="flex min-h-screen bg-gradient-to-br from-slate-200 via-indigo-200 to-blue-200">
 
+      {/* MOBILE OVERLAY */}
+      {isOpen && (
+        <div
+          onClick={toggleSidebar}
+          className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40 md:hidden"
+        />
+      )}
+
       {/* SIDEBAR */}
       <Sidebar isOpen={isOpen} onNavigate={toggleSidebar} />
 
@@ -23,12 +31,14 @@ const MainLayout = ({ children }) => {
         {/* NAVBAR */}
         <Navbar toggleSidebar={toggleSidebar} />
 
-        {/* CONTENT AREA */}
-        <main className="flex-1 overflow-y-auto p-6 md:p-8">
+        {/* CONTENT */}
+        <main className="flex-1 overflow-y-auto">
 
-          {/* PAGE CONTAINER */}
-          <div className="max-w-7xl mx-auto">
+          {/* PAGE WRAPPER */}
+          <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-6">
+
             {children}
+
           </div>
 
         </main>
