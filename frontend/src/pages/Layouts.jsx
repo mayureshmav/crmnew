@@ -1,245 +1,133 @@
 import MainLayout from "../layout/MainLayout";
-import { motion } from "framer-motion";
 import { useState } from "react";
-import {
-  FaUpload,
-  FaDownload,
-  FaEye,
-  FaDraftingCompass,
-  FaCheckCircle
-} from "react-icons/fa";
-
-const Layouts = () => {
-
-  const [layouts] = useState([
-    {
-      id: 1,
-      project: "Modern Villa Interior",
-      designer: "Rohit",
-      file: "villa-layout-v1.dwg",
-      type: "AutoCAD",
-      status: "Client Review",
-    },
-    {
-      id: 2,
-      project: "Office Renovation",
-      designer: "Prince Choudhary",
-      file: "office-layout-v2.dwg",
-      type: "AutoCAD",
-      status: "Approved",
-    },
-  ]);
+import { motion } from "framer-motion";
 
-  return (
-    <MainLayout>
+import LayoutHeader from "../components/layouts/LayoutHeader";
+import LayoutStats from "../components/layouts/LayoutStats";
+import LayoutTable from "../components/layouts/LayoutTable";
+import UploadLayoutModal from "../components/layouts/UploadLayoutModal";
+
+export default function Layouts(){
+
+const [showUpload,setShowUpload] = useState(false);
+
+const [layouts,setLayouts] = useState([
+{
+id:1,
+name:"Villa Floor Plan",
+project:"Modern Villa",
+type:"Floor Plan",
+version:"v2",
+uploadedBy:"Rohit",
+date:"2026-04-20",
+status:"Approved"
+}
+]);
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="space-y-8"
-      >
+return(
 
-        {/* HEADER */}
+<MainLayout>
 
-        <div className="flex justify-between items-center">
+{/* 🌈 PREMIUM BACKGROUND */}
 
-          <h1 className="text-2xl font-semibold text-gray-800">
-            Layouts & Designs
-          </h1>
+<div className="
+relative min-h-screen
+bg-gradient-to-br from-slate-50 via-indigo-50/40 to-purple-50/50
+overflow-hidden
+">
 
-          <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm flex items-center gap-2 shadow">
-            <FaUpload />
-            Upload Layout
-          </button>
+{/* 🔥 GRADIENT GLOWS (Premium effect) */}
 
-        </div>
+<div className="absolute -top-32 -left-20 w-[400px] h-[400px] bg-indigo-300/20 blur-[120px] rounded-full"></div>
 
-        {/* KPI CARDS */}
+<div className="absolute top-1/2 -right-32 w-[400px] h-[400px] bg-purple-300/20 blur-[120px] rounded-full"></div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="bg-blue-50 border border-blue-200 p-5 rounded-xl flex items-center gap-4"
-          >
+{/* 🌟 MAIN CONTENT */}
 
-            <FaDraftingCompass className="text-blue-600 text-2xl" />
+<motion.div
+initial={{opacity:0, y:12}}
+animate={{opacity:1, y:0}}
+transition={{duration:.4}}
+className="
+relative
+max-w-7xl mx-auto
+px-4 sm:px-6 lg:px-8
+py-6
+space-y-6
+"
+>
 
-            <div>
-              <p className="text-sm text-gray-600">
-                Total Layouts
-              </p>
+{/* ================= HEADER ================= */}
 
-              <h2 className="text-xl font-bold">
-                24
-              </h2>
-            </div>
+<motion.div
+initial={{opacity:0, y:-10}}
+animate={{opacity:1, y:0}}
+className="
+p-5 md:p-6
+rounded-2xl
+border border-indigo-100
+bg-gradient-to-r from-white via-indigo-50/50 to-purple-50/50
+shadow-sm
+"
+>
 
-          </motion.div>
+<LayoutHeader onUpload={()=>setShowUpload(true)} />
 
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="bg-yellow-50 border border-yellow-200 p-5 rounded-xl flex items-center gap-4"
-          >
+</motion.div>
 
-            <FaDraftingCompass className="text-yellow-600 text-2xl" />
 
-            <div>
-              <p className="text-sm text-gray-600">
-                Pending Review
-              </p>
+{/* ================= KPI ================= */}
 
-              <h2 className="text-xl font-bold">
-                6
-              </h2>
-            </div>
+<motion.div
+initial={{opacity:0, y:10}}
+animate={{opacity:1, y:0}}
+transition={{delay:.1}}
+className="
+p-4 md:p-5
+rounded-2xl
+border border-indigo-100
+bg-white/80 backdrop-blur
+shadow-md
+"
+>
 
-          </motion.div>
+<LayoutStats layouts={layouts} />
 
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="bg-green-50 border border-green-200 p-5 rounded-xl flex items-center gap-4"
-          >
+</motion.div>
 
-            <FaCheckCircle className="text-green-600 text-2xl" />
 
-            <div>
-              <p className="text-sm text-gray-600">
-                Approved Layouts
-              </p>
+{/* ================= TABLE ================= */}
 
-              <h2 className="text-xl font-bold">
-                18
-              </h2>
-            </div>
+<motion.div
+initial={{opacity:0, y:10}}
+animate={{opacity:1, y:0}}
+transition={{delay:.2}}
+className="
+rounded-2xl
+border border-indigo-100
+bg-white
+shadow-md
+overflow-hidden
+"
+>
 
-          </motion.div>
+<LayoutTable layouts={layouts} />
 
-        </div>
+</motion.div>
 
-        {/* LAYOUT TABLE */}
 
-        <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-x-auto">
+{/* ================= MODAL ================= */}
 
-          <table className="w-full text-sm">
+{showUpload && (
+<UploadLayoutModal onClose={()=>setShowUpload(false)} />
+)}
 
-            {/* TABLE HEADER */}
+</motion.div>
 
-            <thead className="bg-gray-50 text-gray-600 text-xs uppercase">
+</div>
 
-              <tr>
-                <th className="p-4 text-left">Project</th>
-                <th className="p-4 text-left">Designer</th>
-                <th className="p-4 text-left">File</th>
-                <th className="p-4 text-left">Type</th>
-                <th className="p-4 text-left">Status</th>
-                <th className="p-4 text-left">Actions</th>
-              </tr>
+</MainLayout>
 
-            </thead>
-
-            {/* TABLE BODY */}
-
-            <tbody>
-
-              {layouts.map((layout, index) => (
-
-                <motion.tr
-                  key={layout.id}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: index * 0.05 }}
-                  whileHover={{ backgroundColor: "#f9fafb" }}
-                  className="border-t"
-                >
-
-                  {/* PROJECT */}
-
-                  <td className="p-4 font-medium text-gray-800">
-                    {layout.project}
-                  </td>
-
-                  {/* DESIGNER */}
-
-                  <td className="p-4">
-
-                    <div className="flex items-center gap-3">
-
-                      <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-semibold text-xs">
-                        {layout.designer.charAt(0)}
-                      </div>
-
-                      {layout.designer}
-
-                    </div>
-
-                  </td>
-
-                  {/* FILE */}
-
-                  <td className="p-4 text-indigo-600 cursor-pointer font-medium">
-                    {layout.file}
-                  </td>
-
-                  {/* FILE TYPE */}
-
-                  <td className="p-4">
-
-                    <span className="text-xs bg-indigo-100 text-indigo-600 px-2 py-1 rounded-full">
-                      {layout.type}
-                    </span>
-
-                  </td>
-
-                  {/* STATUS */}
-
-                  <td className="p-4">
-
-                    <span
-                      className={`text-xs px-3 py-1 rounded-full font-medium
-                      ${
-                        layout.status === "Approved"
-                          ? "bg-green-100 text-green-600"
-                          : "bg-yellow-100 text-yellow-600"
-                      }`}
-                    >
-                      {layout.status}
-                    </span>
-
-                  </td>
-
-                  {/* ACTIONS */}
-
-                  <td className="p-4">
-
-                    <div className="flex gap-3 text-gray-500">
-
-                      <button className="hover:text-indigo-600">
-                        <FaEye />
-                      </button>
-
-                      <button className="hover:text-green-600">
-                        <FaDownload />
-                      </button>
-
-                    </div>
-
-                  </td>
-
-                </motion.tr>
-
-              ))}
-
-            </tbody>
-
-          </table>
-
-        </div>
-
-      </motion.div>
-
-    </MainLayout>
-  );
-};
-
-export default Layouts;
+)
+}
