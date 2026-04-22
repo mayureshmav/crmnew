@@ -1,0 +1,289 @@
+import { motion } from "framer-motion";
+import {
+User,
+Phone,
+Mail,
+MessageCircle,
+Flame,
+CircleDot,
+Snowflake,
+ArrowUpRight
+} from "lucide-react";
+
+export default function LeadsWidget(){
+
+/*
+|--------------------------------------------------------------------------
+| DATA (API READY)
+|--------------------------------------------------------------------------
+*/
+
+const leads = [
+{
+id:1,
+name:"Rahul Sharma",
+company:"TechSoft",
+status:"Hot",
+score:92,
+lastActivity:"2 min ago"
+},
+{
+id:2,
+name:"Amit Verma",
+company:"FinanceHub",
+status:"Warm",
+score:68,
+lastActivity:"10 min ago"
+},
+{
+id:3,
+name:"Neha Singh",
+company:"StartLabs",
+status:"Cold",
+score:40,
+lastActivity:"30 min ago"
+}
+];
+
+/*
+|--------------------------------------------------------------------------
+| STYLE HELPERS
+|--------------------------------------------------------------------------
+*/
+
+const getStatus = (status)=>{
+
+switch(status){
+
+case "Hot":
+return {
+bg:"bg-red-100 text-red-600",
+gradient:"from-red-500 to-pink-500",
+icon:<Flame size={12}/>
+};
+
+case "Warm":
+return {
+bg:"bg-yellow-100 text-yellow-600",
+gradient:"from-yellow-500 to-orange-500",
+icon:<CircleDot size={12}/>
+};
+
+default:
+return {
+bg:"bg-blue-100 text-blue-600",
+gradient:"from-blue-500 to-indigo-500",
+icon:<Snowflake size={12}/>
+};
+
+}
+
+};
+
+/*
+|--------------------------------------------------------------------------
+| LAYOUT
+|--------------------------------------------------------------------------
+*/
+
+return(
+
+<motion.div
+initial={{opacity:0,y:10}}
+animate={{opacity:1,y:0}}
+transition={{duration:.4}}
+className="
+relative
+rounded-2xl
+border border-indigo-200
+bg-gradient-to-br from-white via-indigo-50 to-purple-50
+shadow-lg
+p-5
+space-y-5
+"
+>
+
+{/* GLOBAL GLOW */}
+
+<div className="absolute -top-20 -right-20 w-72 h-72 bg-indigo-300/20 blur-3xl rounded-full"></div>
+
+<div className="relative space-y-5">
+
+{/* HEADER */}
+
+<div className="flex items-center justify-between">
+
+<div className="flex items-center gap-2">
+
+<div className="p-2 rounded-lg bg-indigo-100 text-indigo-600">
+<User size={16}/>
+</div>
+
+<h3 className="font-semibold text-gray-800">
+My Leads
+</h3>
+
+</div>
+
+<span className="text-xs text-indigo-600 font-medium">
+High Priority First
+</span>
+
+</div>
+
+
+{/* LIST */}
+
+<div className="space-y-3">
+
+{leads.map((lead,i)=>{
+
+const style = getStatus(lead.status);
+
+return(
+
+<motion.div
+key={lead.id}
+initial={{opacity:0,y:10}}
+animate={{opacity:1,y:0}}
+transition={{delay:i*0.05}}
+whileHover={{y:-4,scale:1.01}}
+className="
+group
+relative
+p-[1px]
+rounded-xl
+bg-gradient-to-br from-white/30 to-white/10
+"
+>
+
+{/* Hover Gradient Border */}
+
+<div className={`
+absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100
+bg-gradient-to-br ${style.gradient}
+blur-md transition duration-500
+`}></div>
+
+{/* Card */}
+
+<div className="
+relative
+bg-white/80 backdrop-blur
+border border-gray-200
+rounded-xl
+p-4
+shadow-sm
+space-y-3
+">
+
+{/* TOP */}
+
+<div className="flex items-center justify-between">
+
+<div className="flex items-center gap-3">
+
+<div className="p-2 bg-gray-100 rounded-lg">
+<User size={16}/>
+</div>
+
+<div>
+
+<p className="text-sm font-medium text-gray-800">
+{lead.name}
+</p>
+
+<p className="text-xs text-gray-500">
+{lead.company}
+</p>
+
+</div>
+
+</div>
+
+<span className={`
+flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium
+${style.bg}
+`}>
+
+{style.icon}
+{lead.status}
+
+</span>
+
+</div>
+
+
+{/* MID INFO */}
+
+<div className="flex items-center justify-between text-xs text-gray-500">
+
+<span>Score: {lead.score}</span>
+<span>Last: {lead.lastActivity}</span>
+
+</div>
+
+
+{/* ACTIONS */}
+
+<div className="flex items-center justify-between pt-2 border-t">
+
+<div className="flex gap-2">
+
+<button className="p-2 bg-gray-100 rounded-lg hover:bg-gray-200">
+<Phone size={14}/>
+</button>
+
+<button className="p-2 bg-gray-100 rounded-lg hover:bg-gray-200">
+<MessageCircle size={14}/>
+</button>
+
+<button className="p-2 bg-gray-100 rounded-lg hover:bg-gray-200">
+<Mail size={14}/>
+</button>
+
+</div>
+
+<button className="flex items-center gap-1 text-xs text-indigo-600 font-medium">
+
+Open
+<ArrowUpRight size={14}/>
+
+</button>
+
+</div>
+
+</div>
+
+</motion.div>
+
+)
+
+})}
+
+</div>
+
+
+{/* FOOTER */}
+
+<div className="
+flex items-center justify-between
+text-xs text-gray-500
+pt-2 border-t
+">
+
+<span>{leads.length} active leads</span>
+
+<span className="text-indigo-600 font-medium cursor-pointer">
+View pipeline →
+</span>
+
+</div>
+
+</div>
+
+</motion.div>
+
+)
+
+}

@@ -17,7 +17,7 @@ import { FaFileSignature } from "react-icons/fa6";
 import { FaFileInvoiceDollar } from "react-icons/fa";
 
 const menu = [
-  { name: "Dashboard", path: "/", icon: <FaChartPie /> },
+  { name: "Dashboard", path: "/dashboard", icon: <FaChartPie /> },
   { name: "LEAD & OPPORTUNITY MGMT ", path: "/leads", icon: <FaUserFriends /> },
   { name: "Meetings", path: "/meetings", icon: <FaCalendarAlt /> },
   { name: "Costing & Quotations", path: "/quotations", icon: <FaFileInvoice /> },
