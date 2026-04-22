@@ -23,7 +23,7 @@ const menu = [
   { name: "Costing & Quotations", path: "/quotations", icon: <FaFileInvoice /> },
   { name: "Projects", path: "/projects", icon: <FaProjectDiagram /> },
   { name: "Tasks", path: "/tasks", icon: <FaTasks /> },
-  { name: "Layouts", path: "/layouts", icon: <FaDraftingCompass /> },
+  { name: "Layouts & Designs", path: "/layouts", icon: <FaDraftingCompass /> },
   { name: "Vendors", path: "/vendors", icon: <FaTruck /> },
   { name: "Reports", path: "/reports", icon: <FaChartBar /> },
   { name: "Contracts", path: "/contract", icon: <FaFileSignature /> },
