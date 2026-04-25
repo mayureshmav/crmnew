@@ -7,48 +7,49 @@ MessageCircle,
 Flame,
 CircleDot,
 Snowflake,
-ArrowUpRight
+ArrowUpRight,
+TrendingUp
 } from "lucide-react";
 
-export default function LeadsWidget(){
+export default function AILeadWidget(){
 
 /*
-|--------------------------------------------------------------------------
-| DATA (API READY)
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------- 
+| DATA (UPDATED FOR AI LEAD SCORE)
+|-------------------------------------------------------------------------- 
 */
 
 const leads = [
 {
 id:1,
 name:"Rahul Sharma",
-company:"TechSoft",
+project:"Luxury Villa",
 status:"Hot",
 score:92,
-lastActivity:"2 min ago"
+lastActivity:"2 days ago"
 },
 {
 id:2,
 name:"Amit Verma",
-company:"FinanceHub",
+project:"Office Interior",
 status:"Warm",
 score:68,
-lastActivity:"10 min ago"
+lastActivity:"5 days ago"
 },
 {
 id:3,
 name:"Neha Singh",
-company:"StartLabs",
+project:"Retail Store",
 status:"Cold",
 score:40,
-lastActivity:"30 min ago"
+lastActivity:"15 days ago"
 }
 ];
 
 /*
-|--------------------------------------------------------------------------
-| STYLE HELPERS
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------- 
+| STYLE HELPERS (UNCHANGED STYLE, ONLY LOGIC TUNED)
+|-------------------------------------------------------------------------- 
 */
 
 const getStatus = (status)=>{
@@ -81,9 +82,9 @@ icon:<Snowflake size={12}/>
 };
 
 /*
-|--------------------------------------------------------------------------
-| LAYOUT
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------- 
+| LAYOUT (SAME DESIGN, ONLY CONTENT UPDATED)
+|-------------------------------------------------------------------------- 
 */
 
 return(
@@ -109,34 +110,41 @@ space-y-5
 
 <div className="relative space-y-5">
 
-{/* HEADER */}
+{/* ================= HEADER ================= */}
 
 <div className="flex items-center justify-between">
 
 <div className="flex items-center gap-2">
 
 <div className="p-2 rounded-lg bg-indigo-100 text-indigo-600">
-<User size={16}/>
+<TrendingUp size={16}/>
 </div>
 
+<div>
 <h3 className="font-semibold text-gray-800">
-My Leads
+AI Lead Score
 </h3>
+<p className="text-xs text-gray-500">
+Prioritized leads based on conversion probability
+</p>
+</div>
 
 </div>
 
 <span className="text-xs text-indigo-600 font-medium">
-High Priority First
+High Score First
 </span>
 
 </div>
 
 
-{/* LIST */}
+{/* ================= LIST (UNCHANGED STRUCTURE) ================= */}
 
 <div className="space-y-3">
 
-{leads.map((lead,i)=>{
+{leads
+.sort((a,b)=>b.score - a.score) // 🔥 important (new logic)
+.map((lead,i)=>{
 
 const style = getStatus(lead.status);
 
@@ -165,7 +173,7 @@ bg-gradient-to-br ${style.gradient}
 blur-md transition duration-500
 `}></div>
 
-{/* Card */}
+{/* CARD */}
 
 <div className="
 relative
@@ -194,7 +202,7 @@ space-y-3
 </p>
 
 <p className="text-xs text-gray-500">
-{lead.company}
+{lead.project}
 </p>
 
 </div>
@@ -214,17 +222,22 @@ ${style.bg}
 </div>
 
 
-{/* MID INFO */}
+{/* MID INFO (UPDATED) */}
 
 <div className="flex items-center justify-between text-xs text-gray-500">
 
-<span>Score: {lead.score}</span>
-<span>Last: {lead.lastActivity}</span>
+<span className="font-medium text-indigo-600">
+Score: {lead.score}
+</span>
+
+<span>
+Last: {lead.lastActivity}
+</span>
 
 </div>
 
 
-{/* ACTIONS */}
+{/* ACTIONS (UNCHANGED) */}
 
 <div className="flex items-center justify-between pt-2 border-t">
 
@@ -272,10 +285,10 @@ text-xs text-gray-500
 pt-2 border-t
 ">
 
-<span>{leads.length} active leads</span>
+<span>{leads.length} prioritized leads</span>
 
 <span className="text-indigo-600 font-medium cursor-pointer">
-View pipeline →
+View details →
 </span>
 
 </div>
@@ -285,5 +298,4 @@ View pipeline →
 </motion.div>
 
 )
-
 }
