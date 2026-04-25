@@ -1,254 +1,266 @@
 import { motion } from "framer-motion";
 import {
-TrendingUp,
-CalendarDays
+  TrendingUp,
+  BarChart3
 } from "lucide-react";
 
 import {
-BarChart,
-Bar,
-XAxis,
-YAxis,
-Tooltip,
-ResponsiveContainer,
-CartesianGrid
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  CartesianGrid,
+  Legend
 } from "recharts";
 
 import { useState } from "react";
 
 export default function RevenueChart(){
 
-/*
-|--------------------------------------------------------------------------
-| STATE
-|--------------------------------------------------------------------------
-*/
-
-const [range,setRange] = useState("week");
-
-/*
-|--------------------------------------------------------------------------
-| DATA (simulate API)
-|--------------------------------------------------------------------------
-*/
-
-const dataMap = {
-week:[
-{label:"Mon",revenue:2400},
-{label:"Tue",revenue:1398},
-{label:"Wed",revenue:9800},
-{label:"Thu",revenue:3908},
-{label:"Fri",revenue:4800},
-{label:"Sat",revenue:3800},
-{label:"Sun",revenue:4300}
-],
-month:[
-{label:"Jan",revenue:24000},
-{label:"Feb",revenue:18000},
-{label:"Mar",revenue:32000},
-{label:"Apr",revenue:28000},
-{label:"May",revenue:35000},
-{label:"Jun",revenue:41000}
-],
-year:[
-{label:"2020",revenue:120000},
-{label:"2021",revenue:180000},
-{label:"2022",revenue:220000},
-{label:"2023",revenue:310000},
-{label:"2024",revenue:420000}
-]
-};
-
-const data = dataMap[range];
-
-/*
-|--------------------------------------------------------------------------
-| TOOLTIP
-|--------------------------------------------------------------------------
-*/
+  /*
+  |--------------------------------------------------------------------------
+  | STATE
+  |--------------------------------------------------------------------------
+  */
 
-const CustomTooltip = ({active,payload})=>{
+  const [view,setView] = useState("value");
 
-if(active && payload && payload.length){
+  /*
+  |--------------------------------------------------------------------------
+  | DATA (Monthly Comparison - CLIENT REQUIREMENT)
+  |--------------------------------------------------------------------------
+  */
 
-return(
-
-<div className="
-bg-white
-border border-gray-200
-shadow-md
-rounded-lg
-px-3 py-2
-text-sm
-">
-
-<p className="text-gray-500">
-Revenue
-</p>
-
-<p className="font-semibold text-gray-800">
-${payload[0].value.toLocaleString()}
-</p>
+  const data = [
+    { month:"Jan", realized:40000, anticipated:50000 },
+    { month:"Feb", realized:45000, anticipated:52000 },
+    { month:"Mar", realized:47000, anticipated:55000 },
+    { month:"Apr", realized:52000, anticipated:60000 },
+    { month:"May", realized:58000, anticipated:65000 },
+    { month:"Jun", realized:61000, anticipated:70000 }
+  ];
 
-</div>
+  /*
+  |--------------------------------------------------------------------------
+  | CALCULATIONS
+  |--------------------------------------------------------------------------
+  */
 
-)
+  const avgRealization = Math.round(
+    data.reduce((a,d)=>a+d.realized,0) /
+    data.reduce((a,d)=>a+d.anticipated,0) * 100
+  );
 
-}
+  /*
+  |--------------------------------------------------------------------------
+  | TOOLTIP
+  |--------------------------------------------------------------------------
+  */
 
-return null;
+  const CustomTooltip = ({active,payload,label})=>{
 
-};
+    if(active && payload && payload.length){
 
-/*
-|--------------------------------------------------------------------------
-| LAYOUT
-|--------------------------------------------------------------------------
-*/
+      const r = payload[0].value;
+      const a = payload[1].value;
+      const percent = ((r/a)*100).toFixed(1);
 
-return(
+      return(
 
-<motion.div
-initial={{opacity:0,y:10}}
-animate={{opacity:1,y:0}}
-transition={{duration:.5}}
-className="
-relative
-rounded-2xl
-border border-emerald-200
-bg-gradient-to-br from-white via-emerald-50 to-teal-50
-shadow-lg
-p-6
-space-y-6
-"
->
+        <div className="bg-white border border-gray-200 shadow-md rounded-lg px-3 py-2 text-sm">
 
-{/* Glow */}
+          <p className="text-gray-500 mb-1">{label}</p>
+
+          <p className="text-emerald-600 font-medium">
+            Realized: ₹{r.toLocaleString()}
+          </p>
 
-<div className="absolute -top-20 -right-20 w-80 h-80 bg-emerald-300/30 blur-3xl rounded-full"></div>
+          <p className="text-indigo-600 font-medium">
+            Anticipated: ₹{a.toLocaleString()}
+          </p>
 
-<div className="relative space-y-6">
+          {view !== "value" && (
+            <p className="text-xs text-gray-500 mt-1">
+              {percent}% achieved
+            </p>
+          )}
 
-{/* HEADER */}
+        </div>
 
-<div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      )
 
-<div className="flex items-center gap-3">
+    }
 
-<div className="
-p-2 rounded-lg
-bg-emerald-100 text-emerald-600
-">
+    return null;
 
-<TrendingUp size={18}/>
+  };
 
-</div>
+  /*
+  |--------------------------------------------------------------------------
+  | UI
+  |--------------------------------------------------------------------------
+  */
 
-<div>
+  return(
 
-<h3 className="font-semibold text-gray-800">
-Revenue Analytics
-</h3>
+    <motion.div
+      initial={{opacity:0,y:12}}
+      animate={{opacity:1,y:0}}
+      className="relative"
+    >
 
-<p className="text-xs text-gray-500">
-Track income growth over time
-</p>
+      {/* 🌈 PREMIUM BORDER */}
 
-</div>
+      <div className="
+      p-[1.5px]
+      rounded-2xl
+      bg-gradient-to-r from-emerald-400 via-blue-400 to-indigo-400
+      shadow-[0_10px_40px_rgba(59,130,246,0.15)]
+      ">
 
-</div>
+        {/* INNER CARD */}
 
+        <div className="
+        relative
+        rounded-2xl
+        bg-gradient-to-br from-white via-blue-50/40 to-indigo-50/40
+        p-5 md:p-6
+        space-y-6
+        ">
 
-{/* FILTER */}
+          {/* GLOW */}
 
-<div className="flex items-center gap-2">
+          <div className="absolute -top-20 -right-20 w-64 h-64 bg-blue-300/20 blur-3xl rounded-full"></div>
 
-<CalendarDays size={14} className="text-gray-400"/>
+          {/* ================= HEADER ================= */}
 
-<select
-value={range}
-onChange={(e)=>setRange(e.target.value)}
-className="
-border border-gray-200
-rounded-lg
-px-3 py-1.5
-text-sm
-bg-white
-focus:ring-2 focus:ring-emerald-500
-"
->
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
 
-<option value="week">This Week</option>
-<option value="month">This Month</option>
-<option value="year">This Year</option>
+            <div className="flex items-center gap-3">
 
-</select>
+              <div className="p-2 rounded-lg bg-blue-100 text-blue-600">
+                <TrendingUp size={18}/>
+              </div>
 
-</div>
+              <div>
+                <h3 className="font-semibold text-gray-800">
+                  Revenue Comparison
+                </h3>
+                <p className="text-xs text-gray-500">
+                  Realized vs Anticipated (Monthly)
+                </p>
+              </div>
 
-</div>
+            </div>
 
+            {/* TOGGLE */}
 
-{/* CHART */}
+            <div className="flex items-center bg-gray-100 rounded-lg p-1">
 
-<div className="h-[260px] md:h-[300px]">
+              {["value","percentage","both"].map(v=>(
+                <button
+                  key={v}
+                  onClick={()=>setView(v)}
+                  className={`
+                  px-3 py-1 text-xs rounded-md transition
+                  ${view===v
+                    ? "bg-white shadow text-blue-600"
+                    : "text-gray-500"}
+                  `}
+                >
+                  {v==="value"?"Value":v==="percentage"?"%":"Both"}
+                </button>
+              ))}
 
-<ResponsiveContainer width="100%" height="100%">
+            </div>
 
-<BarChart data={data}>
+          </div>
 
-<CartesianGrid strokeDasharray="3 3" opacity={0.2}/>
 
-<XAxis dataKey="label" tick={{fontSize:12}}/>
+          {/* ================= CHART ================= */}
 
-<YAxis tick={{fontSize:12}}/>
+          <div className="h-[260px] md:h-[320px]">
 
-<Tooltip content={<CustomTooltip/>}/>
+            <ResponsiveContainer width="100%" height="100%">
 
-<Bar
-dataKey="revenue"
-radius={[6,6,0,0]}
-fill="url(#gradient)"
-/>
+              <BarChart data={data}>
 
-<defs>
+                <CartesianGrid strokeDasharray="3 3" opacity={0.2}/>
 
-<linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
+                <XAxis dataKey="month" tick={{fontSize:12}}/>
 
-<stop offset="0%" stopColor="#10b981"/>
-<stop offset="100%" stopColor="#06b6d4"/>
+                <YAxis tick={{fontSize:12}}/>
 
-</linearGradient>
+                <Tooltip content={<CustomTooltip/>}/>
 
-</defs>
+                <Legend />
 
-</BarChart>
+                {/* REALIZED */}
 
-</ResponsiveContainer>
+                <Bar
+                  dataKey="realized"
+                  name="Realized"
+                  radius={[6,6,0,0]}
+                  fill="url(#realizedGradient)"
+                />
 
-</div>
+                {/* ANTICIPATED */}
 
+                <Bar
+                  dataKey="anticipated"
+                  name="Anticipated"
+                  radius={[6,6,0,0]}
+                  fill="url(#anticipatedGradient)"
+                />
 
-{/* FOOTER */}
+                {/* GRADIENTS */}
 
-<div className="
-flex items-center justify-between
-text-xs text-gray-500
-pt-2 border-t
-">
+                <defs>
 
-<span>Updated in real-time</span>
+                  <linearGradient id="realizedGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#22c55e"/>
+                    <stop offset="100%" stopColor="#16a34a"/>
+                  </linearGradient>
 
-<span className="text-emerald-600 font-medium">
-+18% growth this period
-</span>
+                  <linearGradient id="anticipatedGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#6366f1"/>
+                    <stop offset="100%" stopColor="#4f46e5"/>
+                  </linearGradient>
 
-</div>
+                </defs>
 
-</div>
+              </BarChart>
 
-</motion.div>
+            </ResponsiveContainer>
 
-)
+          </div>
+
+
+          {/* ================= INSIGHT ================= */}
+
+          <div className="
+          flex flex-wrap items-center justify-between gap-2
+          text-xs text-gray-500 pt-2 border-t
+          ">
+
+            <span>
+              Avg realization: <span className="text-blue-600 font-medium">{avgRealization}%</span>
+            </span>
+
+            <span className="text-emerald-600 font-medium">
+              Performance gap indicates revenue opportunity
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </motion.div>
+
+  )
 
 }
