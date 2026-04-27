@@ -9,7 +9,6 @@ import LeadDetails from "./pages/LeadDetails";
 import Meetings from "./pages/Meetings";
 import Projects from "./pages/Projects";
 import Quotations from "./pages/Quotations";
-import Tasks from "./pages/Tasks";
 import Layouts from "./pages/Layouts";
 import Vendors from "./pages/Vendors";
 import Reports from "./pages/Reports";
@@ -91,15 +90,7 @@ function App() {
           }
         />
 
-        <Route
-          path="/tasks"
-          element={
-            <ProtectedRoute>
-              <Tasks />
-            </ProtectedRoute>
-          }
-        />
-
+       
         <Route
           path="/layouts"
           element={
